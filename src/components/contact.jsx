@@ -1,15 +1,18 @@
 import { useState } from 'react';
-
+import inputs  from '../constant/inputs';
 
 const Contact = () => {
 
     const [contacts , setContacts] = useState([]);
+    const [alert , setAlert] = useState("");
     const [contact , setContact] = useState({
         name: "" ,
         lastName: "" ,
         email: "" ,
         phone: ""
     });
+
+
 
 
     const changeHandler = (event) =>{
@@ -20,6 +23,12 @@ const Contact = () => {
     }
 
     const addHandler = () =>{
+        if(!contact.name || !contact.lastName || !contact.email || !contact.phone ){
+            setAlert("please enter valid data");
+            return;
+        }
+
+        setAlert("");
         setContacts ((contacts) => [...contacts , contact]);
         setContact({
             name: "" ,
@@ -29,40 +38,23 @@ const Contact = () => {
         })
     }
 
-    const{name , lastName , email , phone} = contact;
 
     return (
         <div>
             <div>
-                <input
-                    type="text"
-                    name="name"
-                    placeholder="Name"
-                    value={name}
-                    onChange={changeHandler}
-                />
-                <input
-                    type="text"
-                    name="lastName"
-                    placeholder="Last Name"
-                    value={lastName}
-                    onChange={changeHandler}
-                />
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={changeHandler}
-                />
-                <input
-                    type="number"
-                    name="phone"
-                    placeholder="phone"
-                    value={phone} 
-                    onChange={changeHandler}
-                />
+                {inputs.map((input , index) => ( 
+                    <input 
+                      key={index}
+                      type={input.type}
+                      name={input.name}
+                      placeholder={input.placeholder}
+                      value={contact[input.name]} 
+                      onChange={changeHandler}
+                    />
+                    ))}
+               
                 <button onClick={addHandler}> Add contact </button>
+             {alert && <p> {alert} </p>}
             </div>
         </div>
     );
