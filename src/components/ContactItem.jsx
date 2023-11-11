@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ContactItem = ({data:{name , lastName , email , phone}}) => {
+const ContactItem = ({data:{id , name , lastName , email , phone } , deleteHandler}) => {
     return (
         <li>
         <p>{name} {lastName}</p>
@@ -12,7 +12,7 @@ const ContactItem = ({data:{name , lastName , email , phone}}) => {
             <span>&#128383;</span>
             {phone}
         </p>
-        <button>&#128937;</button>
+        <button onClick={() => deleteHandler(id)} >&#128937;</button>
     </li>
     );
 };
