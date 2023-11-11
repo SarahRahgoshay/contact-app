@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import inputs  from '../constant/inputs';
-
-import ContactList from './ContactList' ;
 import { v4 } from 'uuid';
+import inputs  from '../constant/inputs';
+import ContactList from './ContactList' ;
+
 
 const Contact = () => {
 
@@ -59,7 +59,7 @@ const Contact = () => {
                     ))}
                
                 <button onClick={addHandler}> Add contact </button>
-             {alert && <p> {alert} </p>}
+            {alert && <p> {alert} </p>}
             </div>
             <ContactList contacts={contacts} />
         </div>
